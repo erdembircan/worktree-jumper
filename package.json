@@ -29,7 +29,8 @@
     "test:watch": "vitest",
     "test:e2e": "vitest run --config vitest.e2e.config.ts",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "license:verify": "npx --yes license-wizard --verify --strict"
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0"
@@ -50,12 +51,5 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
-  },
-  "license-wizard": {
-    "licenseId": "Apache-2.0",
-    "tokens": {
-      "[yyyy]": "2026",
-      "[name of copyright owner]": "Erdem Bircan"
-    }
   }
 }
