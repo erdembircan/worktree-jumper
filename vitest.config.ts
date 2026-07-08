@@ -1,13 +1,11 @@
-import { readFileSync } from 'node:fs';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, mergeConfig } from 'vitest/config';
+import shared from './vitest.shared.js';
 
-const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
-
-export default defineConfig({
-  define: {
-    __VERSION__: JSON.stringify(pkg.version),
-  },
-  test: {
-    include: ['test/**/*.test.ts'],
-  },
-});
+export default mergeConfig(
+  shared,
+  defineConfig({
+    test: {
+      include: ['test/**/*.test.ts'],
+    },
+  }),
+);

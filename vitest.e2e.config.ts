@@ -1,16 +1,14 @@
-import { readFileSync } from 'node:fs';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, mergeConfig } from 'vitest/config';
+import shared from './vitest.shared.js';
 
-const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
-
-export default defineConfig({
-  define: {
-    __VERSION__: JSON.stringify(pkg.version),
-  },
-  test: {
-    include: ['test-e2e/**/*.test.ts'],
-    globalSetup: ['test-e2e/globalSetup.ts'],
-    testTimeout: 30_000,
-    hookTimeout: 30_000,
-  },
-});
+export default mergeConfig(
+  shared,
+  defineConfig({
+    test: {
+      include: ['test-e2e/**/*.test.ts'],
+      globalSetup: ['test-e2e/globalSetup.ts'],
+      testTimeout: 30_000,
+      hookTimeout: 30_000,
+    },
+  }),
+);
