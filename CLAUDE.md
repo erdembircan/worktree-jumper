@@ -1,9 +1,5 @@
 # CLAUDE.md
 
-## Isolate Before Reading
-
-Sync the default branch and isolate into a fresh worktree as the first action of any task — before reading, searching, or inspecting a single repository file. Otherwise reads may come from a stale ref while other sessions merge, and no operation can trust what it read.
-
 ## Announce Completion Out Loud
 
 The maintainer is frequently away from the keyboard or tapped out while work runs. Whenever you finish a unit of work — a task, a subtask, a fix, a commit, a pushed PR, anything you'd report as done — **announce it aloud** with the macOS `say` command, in addition to writing the result as text.
