@@ -1,13 +1,29 @@
 {
   "name": "worktree-jumper",
-  "version": "1.0.0-dev",
+  "version": "1.0.0",
   "description": "Interactively jump between git worktrees from your shell",
+  "keywords": [
+    "git",
+    "worktree",
+    "git-worktree",
+    "cli",
+    "shell",
+    "cd",
+    "zsh",
+    "bash",
+    "fish",
+    "developer-tools"
+  ],
   "type": "module",
   "license": "Apache-2.0",
   "author": "Erdem Bircan",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erdembircan/worktree-jumper.git"
+  },
+  "homepage": "https://github.com/erdembircan/worktree-jumper#readme",
+  "bugs": {
+    "url": "https://github.com/erdembircan/worktree-jumper/issues"
   },
   "packageManager": "pnpm@10.16.1",
   "engines": {
@@ -20,7 +36,8 @@
     "dist",
     "bin",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "node scripts/build.js",

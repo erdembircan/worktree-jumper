@@ -1,5 +1,9 @@
 # worktree-jumper
 
+[![CI](https://github.com/erdembircan/worktree-jumper/actions/workflows/ci.yml/badge.svg)](https://github.com/erdembircan/worktree-jumper/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/worktree-jumper.svg)](https://www.npmjs.com/package/worktree-jumper)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 Interactively jump between git worktrees from your shell. Run `wtj`, pick
 a worktree from the list, and your shell `cd`'s straight there.
 
