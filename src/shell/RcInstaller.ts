@@ -1,17 +1,12 @@
 import { dirname } from 'node:path';
 import type { FileSystem } from './FileSystem.js';
-import type { RcTarget } from './RcResolver.js';
+import type { RcTarget } from './RcTarget.js';
 
 const FENCE_START = '# >>> worktree-jumper >>>';
 const FENCE_END = '# <<< worktree-jumper <<<';
-
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-const FENCE_PATTERN = new RegExp(
-  `${escapeRegExp(FENCE_START)}[\\s\\S]*?${escapeRegExp(FENCE_END)}\\n?`,
-);
+// Neither marker contains a regex metacharacter, so the pattern below is
+// written directly as a literal rather than built from an escaping helper.
+const FENCE_PATTERN = /# >>> worktree-jumper >>>[\s\S]*?# <<< worktree-jumper <<<\n?/;
 
 /**
  * Writes the `init --install` snippet to the resolved rc target,

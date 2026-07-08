@@ -1,6 +1,7 @@
 import type { WorktreeRegistry } from '../git/WorktreeRegistry.js';
-import type { Writer } from '../ui/MachineOutput.js';
-import { PICKER_CANCELLED, type WorktreePicker } from '../ui/Picker.js';
+import { PICKER_CANCELLED } from '../ui/PickerCancelled.js';
+import type { WorktreePicker } from '../ui/WorktreePicker.js';
+import type { Writer } from '../ui/Writer.js';
 
 export type JumpResult = { status: 'selected' } | { status: 'cancelled' };
 

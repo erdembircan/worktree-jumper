@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { JumpCommand } from '../src/commands/JumpCommand.js';
-import { NotAGitRepositoryError } from '../src/git/GitRunner.js';
+import { NotAGitRepositoryError } from '../src/git/NotAGitRepositoryError.js';
 import { WorktreeRegistry } from '../src/git/WorktreeRegistry.js';
 import type { Worktree } from '../src/git/Worktree.js';
 import { FakeGitRunner } from './fakes/FakeGitRunner.js';

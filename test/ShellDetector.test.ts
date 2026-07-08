@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import {
-  ShellDetector,
-  UnknownShellError,
-  type ParentProcessLookup,
-} from '../src/shell/ShellDetector.js';
+import type { ParentProcessLookup } from '../src/shell/ParentProcessLookup.js';
+import { ShellDetector } from '../src/shell/ShellDetector.js';
+import { UnknownShellError } from '../src/shell/UnknownShellError.js';
 
 class FakeParentProcessLookup implements ParentProcessLookup {
   constructor(private readonly command: string | null) {}

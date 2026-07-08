@@ -19,10 +19,15 @@ classDiagram
     }
     GitRunner <|.. ExecFileGitRunner
 
+    class PorcelainParser {
+        +parse(raw: string) Worktree[]
+    }
+
     class WorktreeRegistry {
         +list() Promise~Worktree[]~
     }
     WorktreeRegistry --> GitRunner
+    WorktreeRegistry --> PorcelainParser
 
     class Worktree {
         +path: string
@@ -34,6 +39,7 @@ classDiagram
         +isCurrent: boolean
     }
     WorktreeRegistry ..> Worktree
+    PorcelainParser ..> Worktree
 
     class ShellKind {
         <<type>>
@@ -95,6 +101,16 @@ classDiagram
     }
     Writer <|.. MachineOutput
 
+    class PathDisplay {
+        +format(path: string) string
+    }
+
+    class WorktreePresenter {
+        +present(worktree: Worktree) PresentedWorktree
+    }
+    WorktreePresenter --> PathDisplay
+    WorktreePresenter ..> Worktree
+
     class WorktreePicker {
         <<interface>>
         +pick(worktrees: Worktree[]) Promise~Worktree | Symbol~
@@ -103,6 +119,7 @@ classDiagram
         +pick(worktrees: Worktree[]) Promise~Worktree | Symbol~
     }
     WorktreePicker <|.. Picker
+    Picker --> WorktreePresenter
 
     class Confirmer {
         <<interface>>
@@ -130,19 +147,36 @@ classDiagram
     InitCommand --> RcInstaller
     InitCommand --> Confirmer
     InitCommand --> Writer
+    InitCommand --> PathDisplay
 ```
 
 ## Notes
 
-- `ArgvParser`, `FunctionEmitter`, `ShellQuoter`, and `RcResolver` are pure
-  domain objects with no I/O of their own.
+- `ArgvParser`, `FunctionEmitter`, `ShellQuoter`, `RcResolver`,
+  `PorcelainParser`, and `PathDisplay` are pure domain objects with no I/O
+  of their own. `ArgvParser` wraps `node:util`'s `parseArgs`, adding
+  subcommand detection and typed `UsageError`s. `PorcelainParser.parse`
+  actually returns `Worktree` records minus `isCurrent` — `WorktreeRegistry`
+  resolves that flag afterward by comparing realpaths, then merges it in.
 - `GitRunner` and `FileSystem` are the only two process/disk boundaries in
   the codebase; every other component depends on them (directly or via
   `WorktreeRegistry`/`RcInstaller`) rather than touching `node:child_process`
-  or `node:fs` itself.
-- `Picker` is the only module that imports `@clack/prompts`; `JumpCommand`
-  and `InitCommand` depend on its `WorktreePicker`/`Confirmer` interfaces,
-  not the concrete class, so they're testable without it.
+  or `node:fs` itself. `WorktreeRegistry` also takes an injected `RealpathFn`
+  (a single-function boundary, defaulting to `node:fs/promises`'
+  `realpath`) to normalize paths when marking the current worktree.
+- `WorktreePresenter` formats a `Worktree` into a `PresentedWorktree`
+  (label + `~`-abbreviated hint) for the picker; it and `InitCommand` both
+  depend on `PathDisplay` as the single path-abbreviation domain object,
+  rather than duplicating that logic.
+- `Picker` and `InstallConfirmer` are the only two modules in the codebase
+  that import `@clack/prompts`; `JumpCommand` and `InitCommand` depend on
+  the `WorktreePicker`/`Confirmer` interfaces instead, so they're testable
+  without it.
+- Every exported error, interface, and options/data shape (e.g. `RcTarget`,
+  `PresentedWorktree`, `PickerOptions`) lives in its own file per
+  CLAUDE.md's file-naming rule, but plain data shapes with no behavior are
+  omitted from this diagram — only classes, interfaces, and their
+  collaborations are shown.
 - `src/index.ts` is the composition root: it constructs the real
   implementations of every boundary, dispatches on the parsed command, and
   maps thrown errors to stderr messages and exit codes. It has no public

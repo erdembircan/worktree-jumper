@@ -1,4 +1,4 @@
-import type { Writer } from '../../src/ui/MachineOutput.js';
+import type { Writer } from '../../src/ui/Writer.js';
 
 /**
  * An in-memory `Writer` fake so tests can assert exactly what a command

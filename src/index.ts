@@ -1,30 +1,26 @@
 #!/usr/bin/env node
 import { homedir } from 'node:os';
 import process from 'node:process';
-import { ArgvParser, UsageError } from './cli/ArgvParser.js';
-import { ExecFileGitRunner } from './git/GitRunner.js';
-import { WorktreeRegistry } from './git/WorktreeRegistry.js';
+import { ArgvParser } from './cli/ArgvParser.js';
+import { NotInteractiveError } from './cli/NotInteractiveError.js';
+import { UsageError } from './cli/UsageError.js';
 import { InitCommand } from './commands/InitCommand.js';
 import { JumpCommand } from './commands/JumpCommand.js';
-import { NodeFileSystem } from './shell/FileSystem.js';
-import { FunctionEmitter, InvalidFunctionNameError } from './shell/FunctionEmitter.js';
+import { ExecFileGitRunner } from './git/ExecFileGitRunner.js';
+import { WorktreeRegistry } from './git/WorktreeRegistry.js';
+import { FunctionEmitter } from './shell/FunctionEmitter.js';
+import { InvalidFunctionNameError } from './shell/InvalidFunctionNameError.js';
+import { NodeFileSystem } from './shell/NodeFileSystem.js';
+import { PsParentProcessLookup } from './shell/PsParentProcessLookup.js';
 import { RcInstaller } from './shell/RcInstaller.js';
 import { RcResolver } from './shell/RcResolver.js';
-import { PsParentProcessLookup, ShellDetector } from './shell/ShellDetector.js';
+import { ShellDetector } from './shell/ShellDetector.js';
 import { ShellQuoter } from './shell/ShellQuoter.js';
+import { InstallConfirmer } from './ui/InstallConfirmer.js';
 import { MachineOutput } from './ui/MachineOutput.js';
-import { InstallConfirmer, Picker } from './ui/Picker.js';
-
-/**
- * Thrown when the picker is invoked without an interactive stdin/stderr,
- * since a piped/non-TTY session could never respond to the prompt.
- */
-class NotInteractiveError extends Error {
-  constructor() {
-    super('interactive terminal required');
-    this.name = 'NotInteractiveError';
-  }
-}
+import { PathDisplay } from './ui/PathDisplay.js';
+import { Picker } from './ui/Picker.js';
+import { WorktreePresenter } from './ui/WorktreePresenter.js';
 
 const USAGE = `Usage: worktree-jumper [command] [options]
 
@@ -66,12 +62,11 @@ async function main(): Promise<number> {
     }
 
     const registry = new WorktreeRegistry(new ExecFileGitRunner(), process.cwd());
-    const picker = new Picker({
-      output: process.stderr,
-      input: process.stdin,
-      version: __VERSION__,
-      homeDir: homedir(),
-    });
+    const presenter = new WorktreePresenter(new PathDisplay(homedir()));
+    const picker = new Picker(
+      { output: process.stderr, input: process.stdin, version: __VERSION__ },
+      presenter,
+    );
     const result = await new JumpCommand(registry, picker, stdout).run();
     return result.status === 'cancelled' ? 130 : 0;
   }
@@ -85,7 +80,7 @@ async function main(): Promise<number> {
     new InstallConfirmer({ output: process.stderr, input: process.stdin }),
     stdout,
     stderr,
-    homedir(),
+    new PathDisplay(homedir()),
   );
   const result = await init.run({
     shell: command.shell,

@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { UsageError } from '../src/cli/ArgvParser.js';
+import { UsageError } from '../src/cli/UsageError.js';
 import { InitCommand, type InitCommandInput } from '../src/commands/InitCommand.js';
 import { FunctionEmitter } from '../src/shell/FunctionEmitter.js';
+import type { ParentProcessLookup } from '../src/shell/ParentProcessLookup.js';
 import { RcInstaller } from '../src/shell/RcInstaller.js';
 import { RcResolver } from '../src/shell/RcResolver.js';
-import { ShellDetector, type ParentProcessLookup } from '../src/shell/ShellDetector.js';
+import { ShellDetector } from '../src/shell/ShellDetector.js';
 import { ShellQuoter } from '../src/shell/ShellQuoter.js';
-import { PICKER_CANCELLED } from '../src/ui/Picker.js';
+import { PathDisplay } from '../src/ui/PathDisplay.js';
+import { PICKER_CANCELLED } from '../src/ui/PickerCancelled.js';
 import { FakeConfirmer } from './fakes/FakeConfirmer.js';
 import { FakeFileSystem } from './fakes/FakeFileSystem.js';
 import { FakeWriter } from './fakes/FakeWriter.js';
@@ -39,7 +41,7 @@ function buildCommand(options: {
     new FakeConfirmer(options.confirmOutcome ?? true),
     stdout,
     stderr,
-    options.homeDir ?? '/home/erdem',
+    new PathDisplay(options.homeDir ?? '/home/erdem'),
   );
   return { command, stdout, stderr, fs };
 }

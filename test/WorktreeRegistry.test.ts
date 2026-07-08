@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { NotAGitRepositoryError } from '../src/git/GitRunner.js';
+import { NotAGitRepositoryError } from '../src/git/NotAGitRepositoryError.js';
 import { WorktreeRegistry } from '../src/git/WorktreeRegistry.js';
 import { FakeGitRunner } from './fakes/FakeGitRunner.js';
 

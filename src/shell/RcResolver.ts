@@ -1,17 +1,6 @@
 import { join } from 'node:path';
+import type { RcTarget } from './RcTarget.js';
 import type { ShellKind } from './ShellKind.js';
-
-/**
- * How {@link RcInstaller} should write to the resolved path: append (or
- * replace) a fenced block inside an existing rc file, or manage the whole
- * file as a dedicated conf.d snippet.
- */
-export type RcTargetKind = 'fenced-append' | 'conf.d-file';
-
-export interface RcTarget {
-  path: string;
-  kind: RcTargetKind;
-}
 
 /**
  * Resolves the shell config file `init --install` should write to, purely

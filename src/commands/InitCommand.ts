@@ -1,12 +1,16 @@
-import { DEFAULT_FUNCTION_NAME, UsageError } from '../cli/ArgvParser.js';
+import { DEFAULT_FUNCTION_NAME } from '../cli/DefaultFunctionName.js';
+import { UsageError } from '../cli/UsageError.js';
 import type { FunctionEmitter } from '../shell/FunctionEmitter.js';
+import type { RcInstaller } from '../shell/RcInstaller.js';
+import type { RcResolver } from '../shell/RcResolver.js';
+import type { RcTarget } from '../shell/RcTarget.js';
 import type { ShellDetector } from '../shell/ShellDetector.js';
 import type { ShellKind } from '../shell/ShellKind.js';
 import type { ShellQuoter } from '../shell/ShellQuoter.js';
-import type { RcInstaller } from '../shell/RcInstaller.js';
-import type { RcResolver, RcTarget } from '../shell/RcResolver.js';
-import type { Writer } from '../ui/MachineOutput.js';
-import { PICKER_CANCELLED, type Confirmer } from '../ui/Picker.js';
+import type { Confirmer } from '../ui/Confirmer.js';
+import type { PathDisplay } from '../ui/PathDisplay.js';
+import { PICKER_CANCELLED } from '../ui/PickerCancelled.js';
+import type { Writer } from '../ui/Writer.js';
 
 export interface InitCommandInput {
   shell: ShellKind | null;
@@ -37,8 +41,7 @@ export class InitCommand {
     private readonly installConfirmer: Confirmer,
     private readonly stdout: Writer,
     private readonly stderr: Writer,
-    /** Used only to abbreviate displayed rc paths to `~`. */
-    private readonly homeDir: string,
+    private readonly pathDisplay: PathDisplay,
   ) {}
 
   async run(input: InitCommandInput): Promise<InitResult> {
@@ -93,14 +96,7 @@ export class InitCommand {
     if (target.kind === 'conf.d-file') {
       return 'Start a new fish session to activate (conf.d loads automatically).';
     }
-    return `Restart your shell or run: source ${this.displayPath(target.path)}`;
-  }
-
-  private displayPath(path: string): string {
-    if (this.homeDir.length > 0 && (path === this.homeDir || path.startsWith(`${this.homeDir}/`))) {
-      return `~${path.slice(this.homeDir.length)}`;
-    }
-    return path;
+    return `Restart your shell or run: source ${this.pathDisplay.format(target.path)}`;
   }
 
   private buildEvalCommand(shell: ShellKind, functionName: string): string {

@@ -1,4 +1,5 @@
-import { PICKER_CANCELLED, type Confirmer } from '../../src/ui/Picker.js';
+import type { Confirmer } from '../../src/ui/Confirmer.js';
+import { PICKER_CANCELLED } from '../../src/ui/PickerCancelled.js';
 
 /** A `Confirmer` fake that always resolves to the given outcome. */
 export class FakeConfirmer implements Confirmer {

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { FunctionEmitter, InvalidFunctionNameError } from '../src/shell/FunctionEmitter.js';
+import { FunctionEmitter } from '../src/shell/FunctionEmitter.js';
+import { InvalidFunctionNameError } from '../src/shell/InvalidFunctionNameError.js';
 
 describe('FunctionEmitter', () => {
   const emitter = new FunctionEmitter();
