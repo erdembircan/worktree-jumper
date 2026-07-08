@@ -6,6 +6,14 @@ import type { WorktreePicker } from './WorktreePicker.js';
 import type { WorktreePresenter } from './WorktreePresenter.js';
 
 /**
+ * The picker's prompt message. The trailing newline renders as a blank
+ * guide line between the prompt and the option list, giving the list
+ * breathing room — clack otherwise draws the first option flush against
+ * the prompt. Do not strip the trailing newline.
+ */
+const SELECT_MESSAGE = 'Select a worktree\n';
+
+/**
  * Renders the interactive worktree picker via `@clack/prompts`, writing
  * all UI to the injected output stream (stderr in production) so stdout
  * stays reserved for the selected path. Along with `InstallConfirmer`,
@@ -29,7 +37,7 @@ export class Picker implements WorktreePicker {
     intro(`worktree-jumper v${version}`, { output });
 
     const result = await select<Worktree>({
-      message: 'Select a worktree',
+      message: SELECT_MESSAGE,
       options: worktrees.map((worktree) => this.presenter.present(worktree)),
       initialValue: worktrees.find((worktree) => worktree.isCurrent),
       output,
