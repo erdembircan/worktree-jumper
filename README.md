@@ -40,7 +40,14 @@ With no arguments, this detects your shell and prints the exact line to
 add to your shell config, along with the file to add it to — nothing is
 written for you. That line is a small `eval`; the binary itself can't
 `cd` your shell (only a child process, it can't reach into its parent),
-so `init` hands you a tiny shell function that does.
+so `init` hands you a tiny shell function that does. Here's the line for
+each supported shell, ready to paste:
+
+| Shell | Config file                                  | Line to add                                   |
+| ----- | --------------------------------------------- | ---------------------------------------------- |
+| zsh   | `~/.zshrc`                                    | `eval "$(worktree-jumper init zsh --print)"`   |
+| bash  | `~/.bashrc`                                   | `eval "$(worktree-jumper init bash --print)"`  |
+| fish  | `~/.config/fish/conf.d/worktree-jumper.fish`  | `worktree-jumper init fish --print \| source`  |
 
 Prefer not to copy-paste it yourself:
 
