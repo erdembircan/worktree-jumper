@@ -30,7 +30,7 @@
     "test:e2e": "vitest run --config vitest.e2e.config.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "license:verify": "npx --yes license-wizard --verify --strict"
+    "license:verify": "license-wizard --verify --strict"
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0"
@@ -42,14 +42,10 @@
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "license-wizard": "^1.1.0",
     "prettier": "^3.4.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0",
     "vitest": "^3.0.4"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
   }
 }
