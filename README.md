@@ -37,11 +37,22 @@ change in your *current* shell right away, without opening a new one.
 
 ### Custom function name
 
+By default the function you get is `wtj`. To use a different name, add
+`--as <name>` — to both the `eval` line and the `--install` form:
+
+```sh
+eval "$(worktree-jumper init zsh --print --as jump)"
+```
+
 ```sh
 worktree-jumper init zsh --install --as jump
 ```
 
-The default is `wtj`.
+The name can contain letters, digits, and underscores, and can't start
+with a digit. Whichever name you install with is what you type daily, so
+pick one and use it consistently — if you reinstall with a different
+`--as`, the old function name stops working until you re-source your
+shell config.
 
 ## Usage
 
