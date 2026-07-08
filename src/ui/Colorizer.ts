@@ -8,4 +8,5 @@ export interface Colorizer {
   path(text: string): string;
   commit(text: string): string;
   marker(text: string): string;
+  current(text: string): string;
 }

@@ -35,6 +35,6 @@ export class WorktreePresenter {
     } else {
       label = this.colorizer.commit(worktree.head.slice(0, 7));
     }
-    return worktree.isCurrent ? `${label} ${this.colorizer.marker('(current)')}` : label;
+    return worktree.isCurrent ? `${label} ${this.colorizer.current('(current)')}` : label;
   }
 }

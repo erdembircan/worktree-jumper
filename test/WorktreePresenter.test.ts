@@ -23,7 +23,7 @@ describe('WorktreePresenter', () => {
 
   it('appends "(current)" to the label of the current worktree', () => {
     expect(presenter.present({ ...BASE, isCurrent: true }).label).toBe(
-      '<branch>master</branch> <marker>(current)</marker>',
+      '<branch>master</branch> <current>(current)</current>',
     );
   });
 

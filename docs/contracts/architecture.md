@@ -111,12 +111,14 @@ classDiagram
         +path(text: string) string
         +commit(text: string) string
         +marker(text: string) string
+        +current(text: string) string
     }
     class StyleTextColorizer {
         +branch(text: string) string
         +path(text: string) string
         +commit(text: string) string
         +marker(text: string) string
+        +current(text: string) string
     }
     Colorizer <|.. StyleTextColorizer
 

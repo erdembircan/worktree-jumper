@@ -18,4 +18,7 @@ export class FakeColorizer implements Colorizer {
   marker(text: string): string {
     return `<marker>${text}</marker>`;
   }
+  current(text: string): string {
+    return `<current>${text}</current>`;
+  }
 }

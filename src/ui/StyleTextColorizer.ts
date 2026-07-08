@@ -19,7 +19,7 @@ export class StyleTextColorizer implements Colorizer {
 
   /** Colors a filesystem path. */
   path(text: string): string {
-    return this.paint('blue', text);
+    return this.paint('yellow', text);
   }
 
   /** Colors a short commit SHA. */
@@ -27,12 +27,17 @@ export class StyleTextColorizer implements Colorizer {
     return this.paint('magenta', text);
   }
 
-  /** Colors a status marker such as `(current)`, `(bare)`, or `detached @`. */
+  /** Colors a status marker such as `(bare)` or `detached @`. */
   marker(text: string): string {
-    return this.paint('yellow', text);
+    return this.paint('blue', text);
   }
 
-  private paint(format: 'cyan' | 'blue' | 'magenta' | 'yellow', text: string): string {
+  /** Colors the current-worktree indicator. */
+  current(text: string): string {
+    return this.paint(['bold', 'green'], text);
+  }
+
+  private paint(format: Parameters<typeof styleText>[0], text: string): string {
     return this.enabled ? styleText(format, text, { validateStream: false }) : text;
   }
 }
