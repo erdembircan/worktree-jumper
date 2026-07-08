@@ -13,6 +13,7 @@ await esbuild.build({
   format: 'esm',
   platform: 'node',
   target: 'node22',
+  minify: true,
   external: ['@clack/prompts'],
   // esbuild resolves the "#domain/*" path aliases via tsconfig.json's
   // "paths" field; point at it explicitly rather than relying on
