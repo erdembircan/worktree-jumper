@@ -1,0 +1,55 @@
+{
+  "name": "worktree-jumper",
+  "version": "1.0.0-dev",
+  "description": "Interactively jump between git worktrees from your shell",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Erdem Bircan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erdembircan/worktree-jumper.git"
+  },
+  "packageManager": "pnpm@10.16.1",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "bin": {
+    "worktree-jumper": "bin/worktree-jumper.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "license:verify": "npx --yes license-wizard --verify --strict"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/node": "^22.13.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0",
+    "vitest": "^3.0.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

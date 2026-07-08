@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "#cli/*": ["./src/cli/*"],
+      "#commands/*": ["./src/commands/*"],
+      "#git/*": ["./src/git/*"],
+      "#shell/*": ["./src/shell/*"],
+      "#ui/*": ["./src/ui/*"]
+    }
+  },
+  "include": [
+    "src",
+    "test",
+    "test-e2e",
+    "scripts",
+    "vitest.shared.ts",
+    "vitest.config.ts",
+    "vitest.e2e.config.ts"
+  ]
+}

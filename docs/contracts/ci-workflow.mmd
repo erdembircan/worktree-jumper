@@ -1,0 +1,40 @@
+---
+title: worktree-jumper CI Workflow
+---
+sequenceDiagram
+    actor Dev as Developer
+    participant FB as Feature Branch
+    participant M as master
+    participant GH as GitHub Actions
+
+    rect rgb(230, 240, 255)
+        Note over FB,M: PR → master
+        Dev->>FB: push changes
+        FB->>M: open PR
+        activate GH
+        GH->>GH: install zsh + fish
+        GH->>GH: pnpm install --frozen-lockfile
+        GH->>GH: typecheck
+        GH->>GH: lint
+        GH->>GH: test
+        GH->>GH: build
+        GH->>GH: test:e2e
+        GH->>GH: license:verify
+        deactivate GH
+        GH-->>FB: checks pass
+        Dev->>M: merge PR
+    end
+
+    rect rgb(224, 255, 230)
+        Note over M,GH: Push → master (post-merge)
+        activate GH
+        GH->>GH: install zsh + fish
+        GH->>GH: pnpm install --frozen-lockfile
+        GH->>GH: typecheck
+        GH->>GH: lint
+        GH->>GH: test
+        GH->>GH: build
+        GH->>GH: test:e2e
+        GH->>GH: license:verify
+        deactivate GH
+    end
