@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { Worktree } from '#git/Worktree.js';
 import { PathDisplay } from '#ui/PathDisplay.js';
 import { Picker } from '#ui/Picker.js';
+import { StyleTextColorizer } from '#ui/StyleTextColorizer.js';
 import { WorktreePresenter } from '#ui/WorktreePresenter.js';
 
 const MASTER: Worktree = {
@@ -46,7 +47,7 @@ describe('Picker', () => {
 
     const picker = new Picker(
       { output, input, version: '1.2.3' },
-      new WorktreePresenter(new PathDisplay('/home/user')),
+      new WorktreePresenter(new PathDisplay('/home/user'), new StyleTextColorizer(false)),
     );
 
     const pending = picker.pick([MASTER, FEATURE]);

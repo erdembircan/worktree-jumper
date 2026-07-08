@@ -15,10 +15,12 @@ import { RcInstaller } from '#shell/RcInstaller.js';
 import { RcResolver } from '#shell/RcResolver.js';
 import { ShellDetector } from '#shell/ShellDetector.js';
 import { ShellQuoter } from '#shell/ShellQuoter.js';
+import { colorSupported } from '#ui/ColorSupport.js';
 import { InstallConfirmer } from '#ui/InstallConfirmer.js';
 import { MachineOutput } from '#ui/MachineOutput.js';
 import { PathDisplay } from '#ui/PathDisplay.js';
 import { Picker } from '#ui/Picker.js';
+import { StyleTextColorizer } from '#ui/StyleTextColorizer.js';
 import { WorktreePresenter } from '#ui/WorktreePresenter.js';
 
 const USAGE = `Usage: worktree-jumper [command] [options]
@@ -61,7 +63,8 @@ async function main(): Promise<number> {
     }
 
     const registry = new WorktreeRegistry(new ExecFileGitRunner(), process.cwd());
-    const presenter = new WorktreePresenter(new PathDisplay(homedir()));
+    const colorizer = new StyleTextColorizer(colorSupported(process.stderr));
+    const presenter = new WorktreePresenter(new PathDisplay(homedir()), colorizer);
     const picker = new Picker(
       { output: process.stderr, input: process.stdin, version: __VERSION__ },
       presenter,

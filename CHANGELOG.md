@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **Color-coded worktree listing** — the interactive picker now renders each
+  kind of information in its own color (branch, path, commit sha, and status
+  markers), making entries easier to distinguish at a glance. Color is native
+  (Node's `util.styleText`, no new dependency) and is automatically disabled
+  when the terminal doesn't support it or `NO_COLOR` is set.
+
 ## [1.0.0] - 2026-07-08
 
 Initial public release.

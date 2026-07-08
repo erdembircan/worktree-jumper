@@ -105,10 +105,26 @@ classDiagram
         +format(path: string) string
     }
 
+    class Colorizer {
+        <<interface>>
+        +branch(text: string) string
+        +path(text: string) string
+        +commit(text: string) string
+        +marker(text: string) string
+    }
+    class StyleTextColorizer {
+        +branch(text: string) string
+        +path(text: string) string
+        +commit(text: string) string
+        +marker(text: string) string
+    }
+    Colorizer <|.. StyleTextColorizer
+
     class WorktreePresenter {
         +present(worktree: Worktree) PresentedWorktree
     }
     WorktreePresenter --> PathDisplay
+    WorktreePresenter --> Colorizer
     WorktreePresenter ..> Worktree
 
     class WorktreePicker {
@@ -167,7 +183,12 @@ classDiagram
 - `WorktreePresenter` formats a `Worktree` into a `PresentedWorktree`
   (label + `~`-abbreviated hint) for the picker; it and `InitCommand` both
   depend on `PathDisplay` as the single path-abbreviation domain object,
-  rather than duplicating that logic.
+  rather than duplicating that logic. It now also colors each field kind —
+  branch, path, commit sha, and status markers — through an injected
+  `Colorizer`, so the listing is scannable at a glance. `StyleTextColorizer`
+  is the sole module that emits ANSI, via Node's native `util.styleText`
+  (no color dependency), and only when the `colorSupported` helper judges
+  the picker's stderr stream capable of it.
 - `Picker` and `InstallConfirmer` are the only two modules in the codebase
   that import `@clack/prompts`; `JumpCommand` and `InitCommand` depend on
   the `WorktreePicker`/`Confirmer` interfaces instead, so they're testable
