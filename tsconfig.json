@@ -13,13 +13,12 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": ".",
     "paths": {
-      "#cli/*": ["src/cli/*"],
-      "#commands/*": ["src/commands/*"],
-      "#git/*": ["src/git/*"],
-      "#shell/*": ["src/shell/*"],
-      "#ui/*": ["src/ui/*"]
+      "#cli/*": ["./src/cli/*"],
+      "#commands/*": ["./src/commands/*"],
+      "#git/*": ["./src/git/*"],
+      "#shell/*": ["./src/shell/*"],
+      "#ui/*": ["./src/ui/*"]
     }
   },
   "include": [
