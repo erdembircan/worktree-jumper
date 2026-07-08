@@ -71,24 +71,39 @@ async function main(): Promise<number> {
     return result.status === 'cancelled' ? 130 : 0;
   }
 
-  const init = new InitCommand(
-    new ShellDetector(new PsParentProcessLookup(), process.env),
-    new FunctionEmitter(),
-    new ShellQuoter(),
-    new RcResolver(process.env),
-    new RcInstaller(new NodeFileSystem()),
-    new InstallConfirmer({ output: process.stderr, input: process.stdin }),
-    stdout,
-    stderr,
-    new PathDisplay(homedir()),
-  );
-  const result = await init.run({
-    shell: command.shell,
-    print: command.print,
-    install: command.install,
-    functionName: command.functionName,
-  });
-  return result.status === 'cancelled' ? 130 : 0;
+  if (command.kind === 'init') {
+    const init = new InitCommand(
+      new ShellDetector(new PsParentProcessLookup(), process.env),
+      new FunctionEmitter(),
+      new ShellQuoter(),
+      new RcResolver(process.env),
+      new RcInstaller(new NodeFileSystem()),
+      new InstallConfirmer({ output: process.stderr, input: process.stdin }),
+      stdout,
+      stderr,
+      new PathDisplay(homedir()),
+    );
+    const result = await init.run({
+      shell: command.shell,
+      print: command.print,
+      install: command.install,
+      functionName: command.functionName,
+    });
+    return result.status === 'cancelled' ? 130 : 0;
+  }
+
+  return assertNever(command);
+}
+
+/**
+ * Exhaustiveness guard: every `ParsedCommand` kind is handled by one of
+ * the branches above, so this is unreachable at runtime. If a new kind is
+ * ever added to `ParsedCommand` without a matching branch, `command`'s
+ * narrowed type here stops being `never` and this becomes a compile
+ * error instead of a silent fall-through.
+ */
+function assertNever(command: never): never {
+  throw new Error(`unreachable: unhandled command kind ${JSON.stringify(command)}`);
 }
 
 function exitCodeFor(error: unknown): number {
