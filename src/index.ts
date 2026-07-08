@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { homedir } from 'node:os';
 import process from 'node:process';
 import { ArgvParser } from '#cli/ArgvParser.js';
