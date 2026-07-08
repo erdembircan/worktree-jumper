@@ -11,9 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ubuntu-latest ships bash but not zsh; the e2e suite evals init
-      # output in a real zsh, so it must be installed explicitly.
-      - run: sudo apt-get update && sudo apt-get install -y zsh
+      # ubuntu-latest ships bash but neither zsh nor fish; the e2e suite
+      # evals init output in a real zsh and (when present) a real fish,
+      # so both must be installed explicitly.
+      - run: sudo apt-get update && sudo apt-get install -y zsh fish
 
       - uses: pnpm/action-setup@v4
 
