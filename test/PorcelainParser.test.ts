@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { PorcelainParser } from '../src/git/PorcelainParser.js';
+import { PorcelainParser } from '#git/PorcelainParser.js';
 
 function porcelain(records: string[][]): string {
   return records.map((record) => `${record.join('\0')}\0\0`).join('');

@@ -14,6 +14,10 @@ await esbuild.build({
   platform: 'node',
   target: 'node22',
   external: ['@clack/prompts'],
+  // esbuild resolves the "#domain/*" path aliases via tsconfig.json's
+  // "paths" field; point at it explicitly rather than relying on
+  // discovery, so the alias mapping stays a single source of truth.
+  tsconfig: path.join(rootDir, 'tsconfig.json'),
   define: {
     __VERSION__: JSON.stringify(pkg.version),
   },

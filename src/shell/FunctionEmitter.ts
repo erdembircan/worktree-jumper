@@ -1,4 +1,4 @@
-import { InvalidFunctionNameError } from './InvalidFunctionNameError.js';
+import { InvalidFunctionNameError } from './errors/InvalidFunctionNameError.js';
 import type { ShellKind } from './ShellKind.js';
 
 const NAME_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;

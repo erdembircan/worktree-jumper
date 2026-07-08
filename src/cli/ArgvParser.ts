@@ -1,8 +1,8 @@
 import { parseArgs } from 'node:util';
-import { isShellKind, type ShellKind } from '../shell/ShellKind.js';
+import { isShellKind, type ShellKind } from '#shell/ShellKind.js';
 import { DEFAULT_FUNCTION_NAME } from './DefaultFunctionName.js';
 import type { ParsedCommand } from './ParsedCommand.js';
-import { UsageError } from './UsageError.js';
+import { UsageError } from './errors/UsageError.js';
 
 /**
  * Wraps `node:util`'s `parseArgs` with this CLI's extended behavior:

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ShellQuoter } from '../src/shell/ShellQuoter.js';
+import { ShellQuoter } from '#shell/ShellQuoter.js';
 
 describe('ShellQuoter', () => {
   const quoter = new ShellQuoter();

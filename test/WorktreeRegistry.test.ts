@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { NotAGitRepositoryError } from '../src/git/NotAGitRepositoryError.js';
-import { WorktreeRegistry } from '../src/git/WorktreeRegistry.js';
+import { NotAGitRepositoryError } from '#git/errors/NotAGitRepositoryError.js';
+import { WorktreeRegistry } from '#git/WorktreeRegistry.js';
 import { FakeGitRunner } from './fakes/FakeGitRunner.js';
 
 function porcelain(records: string[][]): string {

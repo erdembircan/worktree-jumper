@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 import { homedir } from 'node:os';
 import process from 'node:process';
-import { ArgvParser } from './cli/ArgvParser.js';
-import { NotInteractiveError } from './cli/NotInteractiveError.js';
-import { UsageError } from './cli/UsageError.js';
-import { InitCommand } from './commands/InitCommand.js';
-import { JumpCommand } from './commands/JumpCommand.js';
-import { ExecFileGitRunner } from './git/ExecFileGitRunner.js';
-import { WorktreeRegistry } from './git/WorktreeRegistry.js';
-import { FunctionEmitter } from './shell/FunctionEmitter.js';
-import { InvalidFunctionNameError } from './shell/InvalidFunctionNameError.js';
-import { NodeFileSystem } from './shell/NodeFileSystem.js';
-import { PsParentProcessLookup } from './shell/PsParentProcessLookup.js';
-import { RcInstaller } from './shell/RcInstaller.js';
-import { RcResolver } from './shell/RcResolver.js';
-import { ShellDetector } from './shell/ShellDetector.js';
-import { ShellQuoter } from './shell/ShellQuoter.js';
-import { InstallConfirmer } from './ui/InstallConfirmer.js';
-import { MachineOutput } from './ui/MachineOutput.js';
-import { PathDisplay } from './ui/PathDisplay.js';
-import { Picker } from './ui/Picker.js';
-import { WorktreePresenter } from './ui/WorktreePresenter.js';
+import { ArgvParser } from '#cli/ArgvParser.js';
+import { NotInteractiveError } from '#cli/errors/NotInteractiveError.js';
+import { UsageError } from '#cli/errors/UsageError.js';
+import { InitCommand } from '#commands/InitCommand.js';
+import { JumpCommand } from '#commands/JumpCommand.js';
+import { ExecFileGitRunner } from '#git/ExecFileGitRunner.js';
+import { WorktreeRegistry } from '#git/WorktreeRegistry.js';
+import { FunctionEmitter } from '#shell/FunctionEmitter.js';
+import { InvalidFunctionNameError } from '#shell/errors/InvalidFunctionNameError.js';
+import { NodeFileSystem } from '#shell/NodeFileSystem.js';
+import { PsParentProcessLookup } from '#shell/PsParentProcessLookup.js';
+import { RcInstaller } from '#shell/RcInstaller.js';
+import { RcResolver } from '#shell/RcResolver.js';
+import { ShellDetector } from '#shell/ShellDetector.js';
+import { ShellQuoter } from '#shell/ShellQuoter.js';
+import { InstallConfirmer } from '#ui/InstallConfirmer.js';
+import { MachineOutput } from '#ui/MachineOutput.js';
+import { PathDisplay } from '#ui/PathDisplay.js';
+import { Picker } from '#ui/Picker.js';
+import { WorktreePresenter } from '#ui/WorktreePresenter.js';
 
 const USAGE = `Usage: worktree-jumper [command] [options]
 

@@ -12,7 +12,23 @@
     "skipLibCheck": true,
     "noEmit": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "#cli/*": ["src/cli/*"],
+      "#commands/*": ["src/commands/*"],
+      "#git/*": ["src/git/*"],
+      "#shell/*": ["src/shell/*"],
+      "#ui/*": ["src/ui/*"]
+    }
   },
-  "include": ["src", "test", "test-e2e", "scripts", "vitest.config.ts", "vitest.e2e.config.ts"]
+  "include": [
+    "src",
+    "test",
+    "test-e2e",
+    "scripts",
+    "vitest.shared.ts",
+    "vitest.config.ts",
+    "vitest.e2e.config.ts"
+  ]
 }

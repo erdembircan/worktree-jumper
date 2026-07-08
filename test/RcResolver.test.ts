@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RcResolver } from '../src/shell/RcResolver.js';
+import { RcResolver } from '#shell/RcResolver.js';
 
 describe('RcResolver', () => {
   it('resolves zsh to $ZDOTDIR/.zshrc when ZDOTDIR is set', () => {

@@ -1,4 +1,4 @@
-import type { Worktree } from '../git/Worktree.js';
+import type { Worktree } from '#git/Worktree.js';
 import type { PICKER_CANCELLED } from './PickerCancelled.js';
 
 /**

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RcInstaller } from '../src/shell/RcInstaller.js';
+import { RcInstaller } from '#shell/RcInstaller.js';
 import { FakeFileSystem } from './fakes/FakeFileSystem.js';
 
 const SNIPPET = 'eval "$(worktree-jumper init zsh --print)"';

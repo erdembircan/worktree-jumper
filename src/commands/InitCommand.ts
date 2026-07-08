@@ -1,16 +1,16 @@
-import { DEFAULT_FUNCTION_NAME } from '../cli/DefaultFunctionName.js';
-import { UsageError } from '../cli/UsageError.js';
-import type { FunctionEmitter } from '../shell/FunctionEmitter.js';
-import type { RcInstaller } from '../shell/RcInstaller.js';
-import type { RcResolver } from '../shell/RcResolver.js';
-import type { RcTarget } from '../shell/RcTarget.js';
-import type { ShellDetector } from '../shell/ShellDetector.js';
-import type { ShellKind } from '../shell/ShellKind.js';
-import type { ShellQuoter } from '../shell/ShellQuoter.js';
-import type { Confirmer } from '../ui/Confirmer.js';
-import type { PathDisplay } from '../ui/PathDisplay.js';
-import { PICKER_CANCELLED } from '../ui/PickerCancelled.js';
-import type { Writer } from '../ui/Writer.js';
+import { DEFAULT_FUNCTION_NAME } from '#cli/DefaultFunctionName.js';
+import { UsageError } from '#cli/errors/UsageError.js';
+import type { FunctionEmitter } from '#shell/FunctionEmitter.js';
+import type { RcInstaller } from '#shell/RcInstaller.js';
+import type { RcResolver } from '#shell/RcResolver.js';
+import type { RcTarget } from '#shell/RcTarget.js';
+import type { ShellDetector } from '#shell/ShellDetector.js';
+import type { ShellKind } from '#shell/ShellKind.js';
+import type { ShellQuoter } from '#shell/ShellQuoter.js';
+import type { Confirmer } from '#ui/Confirmer.js';
+import type { PathDisplay } from '#ui/PathDisplay.js';
+import { PICKER_CANCELLED } from '#ui/PickerCancelled.js';
+import type { Writer } from '#ui/Writer.js';
 
 export interface InitCommandInput {
   shell: ShellKind | null;

@@ -1,4 +1,4 @@
-import type { ShellKind } from '../shell/ShellKind.js';
+import type { ShellKind } from '#shell/ShellKind.js';
 
 export type ParsedCommand =
   | { kind: 'jump' }

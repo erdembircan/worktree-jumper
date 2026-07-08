@@ -1,4 +1,4 @@
-import type { GitRunner } from '../../src/git/GitRunner.js';
+import type { GitRunner } from '#git/GitRunner.js';
 
 /**
  * A `GitRunner` fake keyed by the joined argv, so tests can script exact

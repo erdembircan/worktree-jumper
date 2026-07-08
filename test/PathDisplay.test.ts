@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { PathDisplay } from '../src/ui/PathDisplay.js';
+import { PathDisplay } from '#ui/PathDisplay.js';
 
 describe('PathDisplay', () => {
   it('abbreviates a path exactly equal to the home directory to ~', () => {

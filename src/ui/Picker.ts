@@ -1,5 +1,5 @@
 import { intro, isCancel, select } from '@clack/prompts';
-import type { Worktree } from '../git/Worktree.js';
+import type { Worktree } from '#git/Worktree.js';
 import { PICKER_CANCELLED } from './PickerCancelled.js';
 import type { PickerOptions } from './PickerOptions.js';
 import type { WorktreePicker } from './WorktreePicker.js';

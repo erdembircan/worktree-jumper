@@ -1,6 +1,6 @@
-import type { Worktree } from '../../src/git/Worktree.js';
-import { PICKER_CANCELLED } from '../../src/ui/PickerCancelled.js';
-import type { WorktreePicker } from '../../src/ui/WorktreePicker.js';
+import type { Worktree } from '#git/Worktree.js';
+import { PICKER_CANCELLED } from '#ui/PickerCancelled.js';
+import type { WorktreePicker } from '#ui/WorktreePicker.js';
 
 /** A `WorktreePicker` fake that always resolves to the given outcome. */
 export class FakePicker implements WorktreePicker {

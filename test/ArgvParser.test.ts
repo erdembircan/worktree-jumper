@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ArgvParser } from '../src/cli/ArgvParser.js';
-import { UsageError } from '../src/cli/UsageError.js';
+import { ArgvParser } from '#cli/ArgvParser.js';
+import { UsageError } from '#cli/errors/UsageError.js';
 
 describe('ArgvParser', () => {
   const parser = new ArgvParser();

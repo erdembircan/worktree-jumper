@@ -1,8 +1,8 @@
 import { execFile } from 'node:child_process';
-import { GitCommandError } from './GitCommandError.js';
-import { GitNotFoundError } from './GitNotFoundError.js';
+import { GitCommandError } from './errors/GitCommandError.js';
+import { GitNotFoundError } from './errors/GitNotFoundError.js';
 import type { GitRunner } from './GitRunner.js';
-import { NotAGitRepositoryError } from './NotAGitRepositoryError.js';
+import { NotAGitRepositoryError } from './errors/NotAGitRepositoryError.js';
 
 /**
  * Executes git as a real child process via `execFile`, never a shell.

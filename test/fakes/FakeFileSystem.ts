@@ -1,5 +1,5 @@
 import { dirname } from 'node:path';
-import type { FileSystem } from '../../src/shell/FileSystem.js';
+import type { FileSystem } from '#shell/FileSystem.js';
 
 /**
  * An in-memory `FileSystem` fake for exercising `RcInstaller` without

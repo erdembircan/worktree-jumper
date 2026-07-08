@@ -1,7 +1,7 @@
 import { basename } from 'node:path';
 import type { ParentProcessLookup } from './ParentProcessLookup.js';
 import { isShellKind, type ShellKind } from './ShellKind.js';
-import { UnknownShellError } from './UnknownShellError.js';
+import { UnknownShellError } from './errors/UnknownShellError.js';
 
 /**
  * Detects the user's shell by walking the parent process first, falling

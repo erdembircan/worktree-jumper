@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { Worktree } from '../src/git/Worktree.js';
-import { PathDisplay } from '../src/ui/PathDisplay.js';
-import { WorktreePresenter } from '../src/ui/WorktreePresenter.js';
+import type { Worktree } from '#git/Worktree.js';
+import { PathDisplay } from '#ui/PathDisplay.js';
+import { WorktreePresenter } from '#ui/WorktreePresenter.js';
 
 const BASE: Worktree = {
   path: '/home/erdem/repo',
