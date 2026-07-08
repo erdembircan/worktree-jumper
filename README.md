@@ -3,6 +3,25 @@
 Interactively jump between git worktrees from your shell. Run `wtj`, pick
 a worktree from the list, and your shell `cd`'s straight there.
 
+## Why
+
+Worktrees used to be a niche git feature. AI-assisted development made
+them everyday infrastructure: coding agents isolate their work in
+parallel worktrees, so several branches now move at once on the same
+repo instead of one at a time.
+
+That shifts the human's job to hopping between those worktrees all day —
+reviewing an agent's diff, running the code, testing a PR locally before
+merging it. Git has no built-in command to switch *into* a worktree, so
+the ritual is always the same:
+
+- `git worktree list`, find the right row
+- select and copy a long, unmemorable path (`.claude/worktrees/fix-auth-redirect`...)
+- assemble a `cd`, paste it
+
+Do that a few dozen times a day and it's real friction. `worktree-jumper`
+collapses the whole thing into: type `wtj`, pick, land.
+
 ## Install
 
 ```sh
