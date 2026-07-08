@@ -14,22 +14,22 @@ export class StyleTextColorizer implements Colorizer {
 
   /** Colors a branch name. */
   branch(text: string): string {
-    return this.paint('cyan', text);
+    return this.paint(['bold', 'magenta'], text);
   }
 
   /** Colors a filesystem path. */
   path(text: string): string {
-    return this.paint('yellow', text);
+    return this.paint('blue', text);
   }
 
   /** Colors a short commit SHA. */
   commit(text: string): string {
-    return this.paint('magenta', text);
+    return this.paint(['bold', 'cyan'], text);
   }
 
   /** Colors a status marker such as `(bare)` or `detached @`. */
   marker(text: string): string {
-    return this.paint('blue', text);
+    return this.paint(['bold', 'red'], text);
   }
 
   /** Colors the current-worktree indicator. */

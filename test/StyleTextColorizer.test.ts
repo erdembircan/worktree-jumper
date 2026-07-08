@@ -9,17 +9,17 @@ describe('StyleTextColorizer', () => {
   describe('when enabled', () => {
     const colorizer = new StyleTextColorizer(true);
 
-    it('paints a branch name cyan', () => {
-      expect(colorizer.branch('master')).toBe(paint('cyan', 'master'));
+    it('paints a branch name bold magenta', () => {
+      expect(colorizer.branch('master')).toBe(paint(['bold', 'magenta'], 'master'));
     });
-    it('paints a path yellow', () => {
-      expect(colorizer.path('~/repo')).toBe(paint('yellow', '~/repo'));
+    it('paints a path blue', () => {
+      expect(colorizer.path('~/repo')).toBe(paint('blue', '~/repo'));
     });
-    it('paints a commit sha magenta', () => {
-      expect(colorizer.commit('abcdef1')).toBe(paint('magenta', 'abcdef1'));
+    it('paints a commit sha bold cyan', () => {
+      expect(colorizer.commit('abcdef1')).toBe(paint(['bold', 'cyan'], 'abcdef1'));
     });
-    it('paints a marker blue', () => {
-      expect(colorizer.marker('(bare)')).toBe(paint('blue', '(bare)'));
+    it('paints a marker bold red', () => {
+      expect(colorizer.marker('(bare)')).toBe(paint(['bold', 'red'], '(bare)'));
     });
     it('paints the current-worktree indicator bold green', () => {
       expect(colorizer.current('(current)')).toBe(paint(['bold', 'green'], '(current)'));
