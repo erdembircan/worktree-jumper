@@ -25,6 +25,7 @@ function buildCommand(options: {
   confirmOutcome?: boolean | typeof PICKER_CANCELLED;
   fs?: FakeFileSystem;
   env?: Record<string, string | undefined>;
+  homeDir?: string;
 }) {
   const stdout = new FakeWriter();
   const stderr = new FakeWriter();
@@ -38,6 +39,7 @@ function buildCommand(options: {
     new FakeConfirmer(options.confirmOutcome ?? true),
     stdout,
     stderr,
+    options.homeDir ?? '/home/erdem',
   );
   return { command, stdout, stderr, fs };
 }
@@ -82,6 +84,36 @@ describe('InitCommand', () => {
     expect(stderr.contents()).toContain('installed into /home/erdem/.zshrc');
   });
 
+  it('--install for zsh prints a source-based activation hint to stderr, with $HOME abbreviated, and nothing to stdout', async () => {
+    const { command, stdout, stderr } = buildCommand({ confirmOutcome: true });
+
+    await command.run(baseInput({ install: true }));
+
+    expect(stderr.contents()).toContain('Restart your shell or run: source ~/.zshrc');
+    expect(stdout.contents()).toBe('');
+  });
+
+  it('--install for bash prints a source-based activation hint to stderr, with $HOME abbreviated', async () => {
+    const { command, stdout, stderr } = buildCommand({ confirmOutcome: true });
+
+    await command.run(baseInput({ shell: 'bash', install: true }));
+
+    expect(stderr.contents()).toContain('Restart your shell or run: source ~/.bashrc');
+    expect(stdout.contents()).toBe('');
+  });
+
+  it('--install prints the activation hint again on an idempotent re-install (replace case)', async () => {
+    const { command, stderr } = buildCommand({ confirmOutcome: true });
+
+    await command.run(baseInput({ install: true }));
+    const stderrAfterFirst = stderr.contents();
+    await command.run(baseInput({ install: true }));
+
+    expect(stderrAfterFirst).toContain('Restart your shell or run: source ~/.zshrc');
+    const occurrences = stderr.contents().split('Restart your shell or run:').length - 1;
+    expect(occurrences).toBe(2);
+  });
+
   it('--install with a custom --as name embeds --as in the persisted eval line', async () => {
     const { command, fs } = buildCommand({ confirmOutcome: true });
 
@@ -100,6 +132,21 @@ describe('InitCommand', () => {
     expect(content).toBe(
       'command -q worktree-jumper; and worktree-jumper init fish --print | source\n',
     );
+  });
+
+  it('--install for fish prints a "new session" activation hint to stderr, not a source command, and nothing to stdout', async () => {
+    const { command, stdout, stderr } = buildCommand({
+      confirmOutcome: true,
+      env: { HOME: '/home/erdem' },
+    });
+
+    await command.run(baseInput({ shell: 'fish', install: true }));
+
+    expect(stderr.contents()).toContain(
+      'Start a new fish session to activate (conf.d loads automatically).',
+    );
+    expect(stderr.contents()).not.toContain('source ');
+    expect(stdout.contents()).toBe('');
   });
 
   it('--install declined (confirm answers No) does not write and reports declined', async () => {

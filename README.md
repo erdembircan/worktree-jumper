@@ -72,6 +72,14 @@ resolved config file path, asks for confirmation, and then:
   `${XDG_CONFIG_HOME:-~/.config}/fish/conf.d/worktree-jumper.fish`, a file
   fish loads automatically — no need to touch `config.fish`.
 
+Either way, an rc file is only read when a shell starts, so after a
+successful install `worktree-jumper` also prints how to pick up the change
+right away, without opening a new terminal:
+
+- **bash/zsh**: `Restart your shell or run: source <rc path>`.
+- **fish**: nothing to run — conf.d files load automatically in new
+  sessions, and it says so.
+
 On macOS, non-login bash shells (most terminal tabs) source `.bashrc` only
 if your `.bash_profile` explicitly sources it. `--install` writes to
 `.bashrc`; if your bash setup doesn't source it, you'll need to add that

@@ -85,6 +85,7 @@ async function main(): Promise<number> {
     new InstallConfirmer({ output: process.stderr, input: process.stdin }),
     stdout,
     stderr,
+    homedir(),
   );
   const result = await init.run({
     shell: command.shell,
