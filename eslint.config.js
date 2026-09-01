@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
+import dotignore from 'eslint-plugin-dotignore';
 import prettierPlugin from 'eslint-plugin-prettier';
 import tseslint from 'typescript-eslint';
 
@@ -7,9 +8,9 @@ export default tseslint.config(
   {
     ignores: ['.claude/**', 'dist/**', 'node_modules/**', 'coverage/**'],
   },
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
   {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       globals: {
         console: 'readonly',
@@ -28,4 +29,5 @@ export default tseslint.config(
       ],
     },
   },
+  dotignore.configs.strict,
 );

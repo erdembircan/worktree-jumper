@@ -58,6 +58,7 @@
     "esbuild": "^0.28.1",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-dotignore": "^1.0.0",
     "eslint-plugin-prettier": "^5.2.3",
     "license-wizard": "^1.1.0",
     "prettier": "^3.4.2",
