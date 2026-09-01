@@ -1,3 +1,7 @@
-node_modules/
-dist/
+# files
+.DS_Store
+
+# folders
 .claude/
+dist/
+node_modules/
